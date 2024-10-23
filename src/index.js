@@ -1,3 +1,3 @@
-import { createUserInterface } from "./home-page";
+import { createHomePage } from "./home-page";
 
-createUserInterface();
+createHomePage();
