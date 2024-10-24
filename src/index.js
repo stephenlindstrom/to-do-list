@@ -1,3 +1,2 @@
-import { createHomePage } from "./home-page";
-
+import { createHomePage } from "./home-page.js";
 createHomePage();

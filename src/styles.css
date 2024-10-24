@@ -1,0 +1,55 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+}
+
+h1 {
+    color: white;
+    font-size: 3rem;
+}
+
+#header {
+    background-color: green;
+    grid-column: 1 / 3;
+}
+
+#menuBar {
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    background-color: grey;
+    justify-content: space-between;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: max(100px, 10%) 1fr;
+    height: 100%;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+}
+
+dialog {
+    height: 40%;
+    width: 67%;
+    margin: auto;
+}
+
+#projects {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+#projects > button {
+    width: 50%;
+}
