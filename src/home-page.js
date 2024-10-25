@@ -1,70 +1,46 @@
 import { addProject, projectList } from "./to-do-list";
-import { storeProjects, retrieveProjects } from "./storage";
+import { getCounter } from "./counter";
+import { implementProjectDialog } from "./project-dialog";
+import { implementTaskDialog } from "./task-dialog";
+import { activateProjectButtons } from "./project-page";
 import "./styles.css";
-export { createHomePage };
+export { createHomePage, displayProjects, displayTasks };
 
 function createHomePage() {
+    if (getCounter() == 0) {
+        addProject("Home", []);
+    }
     displayProjects();
-    const projectDialog = document.querySelector("#project-dialog");
-    const openProjectDialogButton = document.querySelector("#add-project-button");
-    const closeProjectDialogButton = document.querySelector("#project-dialog > #close-button");
-    const addProjectDialogButton = document.querySelector("#project-dialog > #add-button");
-
-    openProjectDialogButton.addEventListener("click", () => {
-        projectDialog.showModal();
-    })
-
-    closeProjectDialogButton.addEventListener("click", () => {
-        projectDialog.close();
-    });
-
-    addProjectDialogButton.addEventListener("click", () => {
-        const title = document.querySelector("#title").value;
-        addProject(title, []);
-        displayProjects();
-        projectDialog.close()
-    });
-
-    const taskDialog = document.querySelector("#task-dialog");
-    const openTaskDialogButton = document.querySelector("#add-task-button");
-    const closeTaskDialogButton = document.querySelector("#task-dialog > #close-button");
-    const addTaskDialogButton = document.querySelector("#task-dialog > #add-button");
-
-    openTaskDialogButton.addEventListener("click", () => {
-        const projects = retrieveProjects();
-        const projectListItems = document.querySelector("#projectList");
-        for (const project of projects) {
-            const option = document.createElement("option");
-            option.textContent = project.title;
-            option.value = project;
-            projectListItems.appendChild(option);
-        }
-        taskDialog.showModal();
-    })
-
-    closeTaskDialogButton.addEventListener("click", () => {
-        taskDialog.close();
-    });
-
-    addTaskDialogButton.addEventListener("click", () => {
-        const name = document.querySelector("#name").value;
-        const description = document.querySelector("#description").value;
-        const dueDate = document.querySelector("#dueDate").value;
-        const priority = document.querySelector("#priority").checked;
-        const projectChoice = document.querySelector("#projectList").value;
-        Object.assign(projectChoice, )
-        projectChoice.addTask(name, description, dueDate, priority);
-        taskDialog.close()
-    });    
+    displayTasks(1);
+    implementProjectDialog();
+    implementTaskDialog();
+    activateProjectButtons();   
 }
 
 function displayProjects() {
-    const projectList = document.querySelector("#projects");
-    projectList.textContent = "";
-    const projects = retrieveProjects();
-    for (const project of projects) {
+    const projectsList = document.querySelector("#projects");
+    projectsList.textContent = "";
+    for (const project of projectList) {
         const projectButton = document.createElement("button");
-        projectButton.textContent = project.title;
-        projectList.appendChild(projectButton);
+        if (project.id != 1) {
+            projectButton.textContent = project.title;
+            projectButton.id = project.id;
+            projectButton.classList.add("project-button");
+            projectsList.appendChild(projectButton);
+        }
+    }
+}
+
+function displayTasks(projectId) {
+    const taskList = document.querySelector("#taskList");
+    taskList.textContent = "";
+    for (const project of projectList) {
+        if (projectId == project.id) {
+            for (const task of project.taskList) {
+                const taskItem = document.createElement("div");
+                taskItem.textContent = task.name;
+                taskList.appendChild(taskItem);
+            }
+        }
     }
 }
