@@ -3,6 +3,7 @@ import { getCounter } from "./counter";
 import { implementProjectDialog } from "./project-dialog";
 import { implementTaskDialog } from "./task-dialog";
 import { activateProjectButtons } from "./project-page";
+import { activateTodayButton } from "./today-page";
 import "./styles.css";
 export { createHomePage, displayProjects, displayTasks };
 
@@ -15,6 +16,7 @@ function createHomePage() {
     implementProjectDialog();
     implementTaskDialog();
     activateProjectButtons();   
+    activateTodayButton();
 }
 
 function displayProjects() {
