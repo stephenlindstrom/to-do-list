@@ -35,7 +35,7 @@ function displayTasks(projectId) {
     const taskList = document.querySelector("#taskList");
     taskList.textContent = "";
     for (const project of projectList) {
-        if (projectId == project.id) {
+        if (projectId == project.id || projectId == 1) {
             for (const task of project.taskList) {
                 const taskItem = document.createElement("div");
                 taskItem.textContent = task.name;

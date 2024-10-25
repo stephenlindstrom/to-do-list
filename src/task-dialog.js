@@ -11,6 +11,7 @@ function implementTaskDialog() {
 
     openTaskDialogButton.addEventListener("click", () => {
         const projectListItems = document.querySelector("#projectList");
+        projectListItems.textContent = "";
         for (const project of projectList) {
             const option = document.createElement("option");
             option.textContent = project.title;

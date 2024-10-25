@@ -6,7 +6,6 @@ function activateProjectButtons () {
 
     projectButtons.forEach((button) => {
         button.addEventListener("click", () => {
-            console.log("click");
             displayTasks(button.id);
         });
     });
