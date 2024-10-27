@@ -17,7 +17,6 @@ function createHomePage() {
     activateHomeButton();   
     activateTodayButton();
     activateProjectButtons();
-    boldTitle();
 }
 
 function displayProjects() {
@@ -53,6 +52,7 @@ function displayTasks(projectId) {
 
 function activateHomeButton () {
     const homeButton = document.querySelector(".home-button");
+    homeButton.style.fontWeight = "bold";
     homeButton.addEventListener("click", () => {
         displayTasks("1");
     });
