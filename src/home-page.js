@@ -16,6 +16,8 @@ function createHomePage() {
     implementTaskDialog();
     activateHomeButton();   
     activateTodayButton();
+    activateProjectButtons();
+    boldTitle();
 }
 
 function displayProjects() {
@@ -53,5 +55,18 @@ function activateHomeButton () {
     const homeButton = document.querySelector(".home-button");
     homeButton.addEventListener("click", () => {
         displayTasks("1");
+    });
+}
+
+
+function activateProjectButtons () {
+    const projectButtons = document.querySelectorAll(".project-button");
+    projectButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            projectButtons.forEach((button) => {
+                button.style.fontWeight = "normal";
+            });
+            button.style.fontWeight = "bold";
+        });
     });
 }
