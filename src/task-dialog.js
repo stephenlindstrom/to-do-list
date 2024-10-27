@@ -26,10 +26,14 @@ function implementTaskDialog() {
     });
 
     addTaskDialogButton.addEventListener("click", () => {
-        const name = document.querySelector("#name").value;
-        const description = document.querySelector("#description").value;
-        const dueDate = document.querySelector("#dueDate").value;
-        const priority = document.querySelector("#priority").checked;
+        const nameInput = document.querySelector("#name");
+        const name = nameInput.value;
+        const descriptionInput = document.querySelector("#description");
+        const description = descriptionInput.value;
+        const dueDateInput = document.querySelector("#dueDate");
+        const dueDate = dueDateInput.value;
+        const priorityInput = document.querySelector("#priority");
+        const priority = priorityInput.checked;
         const projectChoiceId = JSON.parse(document.querySelector("#projectList").value).id;
         for (const project of projectList) {
             if (projectChoiceId == project.id) {
@@ -38,6 +42,10 @@ function implementTaskDialog() {
                 displayTasks(project.id);
             }
         }
+        nameInput.value = "";
+        descriptionInput.value = "";
+        dueDateInput.value = "";
+        priorityInput.checked = false;
         taskDialog.close()
     });
 }

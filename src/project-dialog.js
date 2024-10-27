@@ -17,9 +17,11 @@ function implementProjectDialog() {
     });
 
     addProjectDialogButton.addEventListener("click", () => {
-        const title = document.querySelector("#title").value;
+        const projectInput = document.querySelector("#title");
+        const title = projectInput.value;
         addProject(title, []);
         displayProjects();
-        projectDialog.close()
+        projectInput.value = "";
+        projectDialog.close();
     });
 }
