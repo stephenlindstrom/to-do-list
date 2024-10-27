@@ -2,7 +2,6 @@ import { addProject, projectList } from "./to-do-list";
 import { getCounter } from "./counter";
 import { implementProjectDialog } from "./project-dialog";
 import { implementTaskDialog } from "./task-dialog";
-import { activateProjectButtons } from "./project-page";
 import { activateTodayButton } from "./today-page";
 import "./styles.css";
 export { createHomePage, displayProjects, displayTasks };
@@ -15,7 +14,7 @@ function createHomePage() {
     displayTasks(1);
     implementProjectDialog();
     implementTaskDialog();
-    activateProjectButtons();   
+    activateHomeButton();   
     activateTodayButton();
 }
 
@@ -28,6 +27,9 @@ function displayProjects() {
             projectButton.textContent = project.title;
             projectButton.id = project.id;
             projectButton.classList.add("project-button");
+            projectButton.addEventListener("click", () => {
+                displayTasks(projectButton.id);
+            });
             projectsList.appendChild(projectButton);
         }
     }
@@ -45,4 +47,11 @@ function displayTasks(projectId) {
             }
         }
     }
+}
+
+function activateHomeButton () {
+    const homeButton = document.querySelector(".home-button");
+    homeButton.addEventListener("click", () => {
+        displayTasks("1");
+    });
 }
