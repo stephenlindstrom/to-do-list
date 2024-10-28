@@ -43,6 +43,13 @@ function implementTaskDialog() {
             if (projectChoiceId == project.id) {
                 project.addTask(name, description, dueDate, priority);
                 storeProjects();
+                const projectButtons = document.querySelectorAll(".project-button");
+                projectButtons.forEach((button) => {
+                    button.style.fontWeight = "normal";
+                    if (button.id == project.id) {
+                        button.style.fontWeight = "bold";
+                    }
+                });
                 displayTasks(project.id);
             }
         }
