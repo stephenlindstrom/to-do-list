@@ -32,31 +32,38 @@ function implementTaskDialog() {
     addTaskDialogButton.addEventListener("click", () => {
         const nameInput = document.querySelector("#name");
         const name = nameInput.value;
-        const descriptionInput = document.querySelector("#description");
-        const description = descriptionInput.value;
-        const dueDateInput = document.querySelector("#dueDate");
-        const dueDate = dueDateInput.value;
-        const priorityInput = document.querySelector("#priority");
-        const priority = priorityInput.checked;
-        const projectChoiceId = JSON.parse(document.querySelector("#projectList").value).id;
-        for (const project of projectList) {
-            if (projectChoiceId == project.id) {
-                project.addTask(name, description, dueDate, priority);
-                storeProjects();
-                const projectButtons = document.querySelectorAll(".project-button");
-                projectButtons.forEach((button) => {
-                    button.style.fontWeight = "normal";
-                    if (button.id == project.id) {
-                        button.style.fontWeight = "bold";
-                    }
-                });
-                displayTasks(project.id);
-            }
+        const warningMessage = document.querySelector("#warning-message");
+        if (name == "") {
+            warningMessage.textContent = "Please add a name";
         }
-        nameInput.value = "";
-        descriptionInput.value = "";
-        dueDateInput.value = "";
-        priorityInput.checked = false;
-        taskDialog.close()
+        else {
+            const descriptionInput = document.querySelector("#description");
+            const description = descriptionInput.value;
+            const dueDateInput = document.querySelector("#dueDate");
+            const dueDate = dueDateInput.value;
+            const priorityInput = document.querySelector("#priority");
+            const priority = priorityInput.checked;
+            const projectChoiceId = JSON.parse(document.querySelector("#projectList").value).id;
+            for (const project of projectList) {
+                if (projectChoiceId == project.id) {
+                    project.addTask(name, description, dueDate, priority);
+                    storeProjects();
+                    const projectButtons = document.querySelectorAll(".project-button");
+                    projectButtons.forEach((button) => {
+                        button.style.fontWeight = "normal";
+                        if (button.id == project.id) {
+                            button.style.fontWeight = "bold";
+                        }
+                    });
+                    displayTasks(project.id);
+                }
+            }
+            nameInput.value = "";
+            descriptionInput.value = "";
+            dueDateInput.value = "";
+            priorityInput.checked = false;
+            warningMessage.textContent = "";
+            taskDialog.close()
+        }
     });
 }
