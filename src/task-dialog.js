@@ -14,12 +14,16 @@ function implementTaskDialog() {
         projectListItems.textContent = "";
         for (const project of projectList) {
             const option = document.createElement("option");
-            option.textContent = project.title;
+            if (project.id == 1) {
+                option.textContent = "None";
+            } else {
+                option.textContent = project.title;
+            }
             option.value = JSON.stringify(project);
             projectListItems.appendChild(option);
         }
         taskDialog.showModal();
-    })
+    });
 
     closeTaskDialogButton.addEventListener("click", () => {
         taskDialog.close();
