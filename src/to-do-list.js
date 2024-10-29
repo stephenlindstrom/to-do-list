@@ -10,4 +10,5 @@ function addProject(title, taskList) {
     const newProject = createProject(id, title, taskList);
     projectList.push(newProject);
     storeProjects();
+    return newProject;
 } 

@@ -19,8 +19,15 @@ function implementProjectDialog() {
     addProjectDialogButton.addEventListener("click", () => {
         const projectInput = document.querySelector("#title");
         const title = projectInput.value;
-        addProject(title, []);
+        const newProject = addProject(title, []);
         displayProjects();
+        const projectButtons = document.querySelectorAll(".project-button");
+        projectButtons.forEach((button) => {
+            button.style.fontWeight = "normal";
+            if (button.id == newProject.id) {
+                button.style.fontWeight = "bold";
+            }
+        });
         projectInput.value = "";
         projectDialog.close();
     });
