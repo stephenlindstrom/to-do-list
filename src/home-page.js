@@ -6,6 +6,8 @@ import { activateTodayButton } from "./today-page";
 import { activateWeekButton } from "./week-page";
 import "./styles.css";
 export { createHomePage, displayProjects, displayTasks };
+const { parse } = require("date-fns");
+const { format } = require("date-fns");
 
 function createHomePage() {
     if (getCounter() == 0) {
@@ -46,7 +48,32 @@ function displayTasks(projectId) {
         if (projectId == project.id || projectId == 1) {
             for (const task of project.taskList) {
                 const taskItem = document.createElement("div");
-                taskItem.textContent = task.name;
+                taskItem.classList.add("task-item-container");
+                const containerOne = document.createElement("div");
+                containerOne.classList.add("container-one");
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                containerOne.appendChild(checkbox);
+                const taskItemName = document.createElement("div");
+                taskItemName.textContent = task.name;
+                containerOne.appendChild(taskItemName);
+                taskItem.appendChild(containerOne);
+                const containerTwo = document.createElement("div");
+                containerTwo.classList.add("container-two");
+                const detailsButton = document.createElement("button");
+                detailsButton.classList.add("details-button");
+                detailsButton.textContent = "Details";
+                containerTwo.appendChild(detailsButton);
+                const taskItemDate = document.createElement("div");
+                const date = parse(task.dueDate, 'yyyy-MM-dd', new Date());
+                let formattedDate = document.createTextNode('\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0');
+                taskItemDate.appendChild(formattedDate);
+                if (date != "Invalid Date") {
+                    formattedDate = format(date, 'MM/dd/yyyy');
+                    taskItemDate.textContent = formattedDate;
+                } 
+                containerTwo.appendChild(taskItemDate);
+                taskItem.appendChild(containerTwo);
                 taskList.appendChild(taskItem);
             }
         }

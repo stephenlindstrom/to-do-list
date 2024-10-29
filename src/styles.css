@@ -75,3 +75,38 @@ dialog {
 .add-buttons {
     margin: 40px 0 20px;
 }
+
+#taskList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin: 50px 0;
+}
+
+.task-item-container {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    background-color: rgb(243, 243, 243);
+    height: 40px;
+    margin-bottom: 15px;
+}
+
+.container-one, .container-two {
+    display: flex;
+    align-items: center;
+}
+
+.container-one > input {
+    margin: 0 10px;
+}
+
+.container-two {
+    width: 33%;
+    justify-content: space-evenly;
+}
+
+.details-button {
+    border: 1px solid blue;
+}
