@@ -36,6 +36,7 @@ function displayProjects() {
             projectsList.appendChild(projectButton);
         }
     }
+    activateProjectButtons();
 }
 
 function displayTasks(projectId) {
