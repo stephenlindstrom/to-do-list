@@ -4,6 +4,7 @@ import { implementProjectDialog } from "./project-dialog";
 import { implementTaskDialog } from "./task-dialog";
 import { activateTodayButton } from "./today-page";
 import { activateWeekButton } from "./week-page";
+import { storeProjects } from "./storage";
 import "./styles.css";
 export { createHomePage, displayProjects, displayTasks };
 const { parse } = require("date-fns");
@@ -52,7 +53,12 @@ function displayTasks(projectId) {
                 const containerOne = document.createElement("div");
                 containerOne.classList.add("container-one");
                 const checkbox = document.createElement("input");
+                checkbox.classList.add("checkbox");
                 checkbox.type = "checkbox";
+                if (task.complete == true) {
+                    checkbox.checked = true;
+                }
+                checkbox.onclick = function() { updateCompletionStatus(task); };
                 containerOne.appendChild(checkbox);
                 const taskItemName = document.createElement("div");
                 taskItemName.textContent = task.name;
@@ -97,6 +103,12 @@ function activateProjectButtons () {
                 button.style.fontWeight = "normal";
             });
             button.style.fontWeight = "bold";
+            storeProjects();
         });
     });
+}
+
+function updateCompletionStatus(task) {
+    const newStatus = task.complete ? false : true;
+    task.complete = newStatus;
 }

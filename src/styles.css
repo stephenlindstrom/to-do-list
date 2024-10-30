@@ -103,10 +103,25 @@ dialog {
 }
 
 .container-two {
-    width: 33%;
+    width: min(300px, 33%);
     justify-content: space-evenly;
 }
 
 .details-button {
-    border: 1px solid blue;
+    border: 2px solid rgb(117, 118, 185);
+    padding: 2px 5px;
+}
+
+.details-button:hover {
+    background-color: rgb(117, 118, 185);
+    color: white;
+    cursor: pointer;
+}
+
+input:hover {
+    cursor: pointer;
+}
+
+.checkbox:checked + div {
+    text-decoration: line-through;
 }
