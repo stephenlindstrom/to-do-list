@@ -1,4 +1,5 @@
 import { projectList } from "./to-do-list";
+import { displayTaskItem } from "./ui-helpers";
 const { parse } = require("date-fns");
 const { isThisWeek } = require("date-fns");
 export { activateWeekButton };
@@ -12,9 +13,7 @@ function activateWeekButton() {
             for (const task of project.taskList) {
                 const date = parse(task.dueDate, 'yyyy-MM-dd', new Date());
                 if (isThisWeek(date)) {
-                    const taskItem = document.createElement("div");
-                    taskItem.textContent = task.name;
-                    taskList.appendChild(taskItem);
+                    displayTaskItem(task);
                 }
             }
         }
