@@ -46,9 +46,14 @@ function displayTasks(projectId) {
     taskList.textContent = "";
     for (const project of projectList) {
         if (projectId == project.id || projectId == 1) {
-            for (const task of project.taskList) {
-                displayTaskItem(task);
+            if (project.taskList.length == 0) {
+                displayEmptyProject();
+            } else {
+                for (const task of project.taskList) {
+                    displayTaskItem(task);
+                }
             }
+            
         }
     }
 }
@@ -73,4 +78,14 @@ function activateProjectButtons () {
             storeProjects();
         });
     });
+}
+
+function displayEmptyProject () {
+    const taskList = document.querySelector("#taskList");
+    const header = document.createElement("h2");
+    header.textContent = "Empty Project";
+    const para = document.createElement("p");
+    para.textContent = "Add a task to this project or delete project"
+    taskList.appendChild(header);
+    taskList.appendChild(para);
 }
