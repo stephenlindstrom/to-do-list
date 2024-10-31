@@ -1,10 +1,13 @@
 import trash from "./trash.svg";
 const { parse } = require("date-fns");
 const { format } = require("date-fns");
+import { displayTasks } from "./home-page";
+import { displayTodayTasks } from "./today-page";
+import { displayWeekTasks } from "./week-page";
 export { displayTaskItem };
 
 
-function displayTaskItem(task) {
+function displayTaskItem(project, task, taskCounter, page) {
     const taskItem = document.createElement("div");
     taskItem.classList.add("task-item-container");
     const containerOne = document.createElement("div");
@@ -40,6 +43,7 @@ function displayTaskItem(task) {
     deleteButton.type = "image";
     deleteButton.classList.add("delete-button");
     deleteButton.src = trash;
+    deleteButton.addEventListener("click", function() { deleteTask(taskCounter, project, page); } );
     containerTwo.appendChild(deleteButton);
     taskItem.appendChild(containerTwo);
     taskList.appendChild(taskItem);
@@ -49,4 +53,15 @@ function displayTaskItem(task) {
 function updateCompletionStatus(task) {
     const newStatus = task.complete ? false : true;
     task.complete = newStatus;
+}
+
+function deleteTask(taskCounter, project, page) {
+    project.taskList.splice(taskCounter, 1);
+    if (page == "project") {
+        displayTasks(project.id);
+    } else if (page == "today") {
+        displayTodayTasks();
+    } else if (page == "week") {
+        displayWeekTasks();
+    }
 }

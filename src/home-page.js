@@ -49,9 +49,11 @@ function displayTasks(projectId) {
             if (projectId != 1 && project.taskList.length == 0) {
                 displayEmptyProject();
             } else {
+                let taskCounter = 0;
                 for (const task of project.taskList) {
-                    displayTaskItem(task);
+                    displayTaskItem(project, task, taskCounter, "project");
                 }
+                taskCounter++;
             }
             
         }
