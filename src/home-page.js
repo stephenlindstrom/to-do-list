@@ -46,7 +46,7 @@ function displayTasks(projectId) {
     taskList.textContent = "";
     for (const project of projectList) {
         if (projectId == project.id || projectId == 1) {
-            if (project.taskList.length == 0) {
+            if (projectId != 1 && project.taskList.length == 0) {
                 displayEmptyProject();
             } else {
                 for (const task of project.taskList) {
