@@ -1,11 +1,12 @@
 import trash from "./trash.svg";
 const { parse } = require("date-fns");
 const { format } = require("date-fns");
-import { displayProjectTasks } from "./home-page";
+import { displayProjectTasks, displayHomeTasks, displayProjects, activateHomeButton } from "./home-page";
 import { displayTodayTasks } from "./today-page";
 import { displayWeekTasks } from "./week-page";
-import { displayHomeTasks } from "./home-page";
-export { displayTaskItem };
+import { projectList } from "./to-do-list";
+import { storeProjects } from "./storage";
+export { displayTaskItem, deleteProject };
 
 
 function displayTaskItem(project, task, taskCounter, page) {
@@ -67,4 +68,13 @@ function deleteTask(taskCounter, project, page) {
     } else if (page == "week") {
         displayWeekTasks();
     }
+}
+
+function deleteProject(projectCounter) {
+    console.log(projectCounter);
+    projectList.splice(projectCounter, 1);
+    storeProjects();
+    displayProjects();
+    displayHomeTasks();
+    activateHomeButton();
 }

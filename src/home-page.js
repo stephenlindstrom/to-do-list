@@ -5,9 +5,9 @@ import { implementTaskDialog } from "./task-dialog";
 import { activateTodayButton } from "./today-page";
 import { activateWeekButton } from "./week-page";
 import { storeProjects } from "./storage";
-import { displayTaskItem } from "./ui-helpers";
+import { displayTaskItem, deleteProject } from "./ui-helpers";
 import "./styles.css";
-export { createHomePage, displayProjects, displayProjectTasks, displayHomeTasks };
+export { createHomePage, displayProjects, displayProjectTasks, displayHomeTasks, activateHomeButton };
 
 function createHomePage() {
     if (getCounter() == 0) {
@@ -50,6 +50,7 @@ function displayProjectTasks(projectId) {
     const emptySpaces = document.createTextNode('\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0');
     placeholder.appendChild(emptySpaces);
     taskHeader.appendChild(placeholder);
+    let projectCounter = 0;
     for (const project of projectList) {
         if (projectId == project.id) {
             const header = document.createElement("h2");
@@ -57,6 +58,9 @@ function displayProjectTasks(projectId) {
             taskHeader.appendChild(header);
             const deleteProjectButton = document.createElement("button");
             deleteProjectButton.textContent = "Delete Project";
+            console.log(projectCounter);
+            const projectIndex = projectCounter;
+            deleteProjectButton.addEventListener("click", function () { deleteProject(projectIndex); });
             taskHeader.appendChild(deleteProjectButton);
             taskList.appendChild(taskHeader);
             if ( project.taskList.length == 0) {
@@ -69,6 +73,7 @@ function displayProjectTasks(projectId) {
                 }
             }
         }
+        projectCounter++;
     }
 }
 
@@ -84,9 +89,9 @@ function displayHomeTasks() {
     const header = document.createElement("h2");
     header.textContent = "Home";
     taskHeader.appendChild(header);
-    const deleteProjectButton = document.createElement("button");
-    deleteProjectButton.textContent = "Delete Project";
-    taskHeader.appendChild(deleteProjectButton);
+    const clearTasksButton = document.createElement("button");
+    clearTasksButton.textContent = "Clear Tasks";
+    taskHeader.appendChild(clearTasksButton);
     taskList.appendChild(taskHeader);
     for (const project of projectList) {
         let taskCounter = 0;

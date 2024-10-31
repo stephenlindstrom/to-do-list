@@ -23,9 +23,9 @@ function displayTodayTasks() {
     const header = document.createElement("h2");
     header.textContent = "Today";
     taskHeader.appendChild(header);
-    const deleteProjectButton = document.createElement("button");
-    deleteProjectButton.textContent = "Delete Project";
-    taskHeader.appendChild(deleteProjectButton);
+    const clearTasksButton = document.createElement("button");
+    clearTasksButton.textContent = "Clear Tasks";
+    taskHeader.appendChild(clearTasksButton);
     taskList.appendChild(taskHeader);
     for (const project of projectList) {
         let taskCounter = 0;
