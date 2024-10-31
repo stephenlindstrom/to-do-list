@@ -22,6 +22,7 @@ h1 {
     justify-content: flex-start
 }
 
+
 img {
     margin-left: 20px;
 }
@@ -129,3 +130,9 @@ input:hover {
 .checkbox:checked + div {
     text-decoration: line-through;
 }
+
+.delete-button:hover {
+    background-color: rgb(117, 118, 185);
+}
+
+

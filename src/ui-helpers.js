@@ -1,3 +1,4 @@
+import trash from "./trash.svg";
 const { parse } = require("date-fns");
 const { format } = require("date-fns");
 export { displayTaskItem };
@@ -35,6 +36,11 @@ function displayTaskItem(task) {
         taskItemDate.textContent = formattedDate;
     } 
     containerTwo.appendChild(taskItemDate);
+    const deleteButton = document.createElement("input");
+    deleteButton.type = "image";
+    deleteButton.classList.add("delete-button");
+    deleteButton.src = trash;
+    containerTwo.appendChild(deleteButton);
     taskItem.appendChild(containerTwo);
     taskList.appendChild(taskItem);
 }
