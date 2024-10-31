@@ -1,6 +1,6 @@
 import { projectList } from "./to-do-list";
 import { storeProjects } from "./storage";
-import { displayTasks } from "./home-page";
+import { displayHomeTasks, displayProjectTasks } from "./home-page";
 export { implementTaskDialog };
 
 function implementTaskDialog() {
@@ -55,7 +55,11 @@ function implementTaskDialog() {
                             button.style.fontWeight = "bold";
                         }
                     });
-                    displayTasks(project.id);
+                    if (project.id == 1) {
+                        displayHomeTasks();
+                    } else {
+                        displayProjectTasks(project.id);
+                    }
                 }
             }
             nameInput.value = "";

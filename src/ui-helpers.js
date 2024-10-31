@@ -1,9 +1,10 @@
 import trash from "./trash.svg";
 const { parse } = require("date-fns");
 const { format } = require("date-fns");
-import { displayTasks } from "./home-page";
+import { displayProjectTasks } from "./home-page";
 import { displayTodayTasks } from "./today-page";
 import { displayWeekTasks } from "./week-page";
+import { displayHomeTasks } from "./home-page";
 export { displayTaskItem };
 
 
@@ -58,7 +59,9 @@ function updateCompletionStatus(task) {
 function deleteTask(taskCounter, project, page) {
     project.taskList.splice(taskCounter, 1);
     if (page == "project") {
-        displayTasks(project.id);
+        displayProjectTasks(project.id);
+    } else if ( page == "home") {
+        displayHomeTasks();
     } else if (page == "today") {
         displayTodayTasks();
     } else if (page == "week") {

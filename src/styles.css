@@ -135,4 +135,11 @@ input:hover {
     background-color: rgb(117, 118, 185);
 }
 
+#task-header {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin-bottom: 20px;
+}
+
 

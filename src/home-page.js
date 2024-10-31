@@ -7,14 +7,14 @@ import { activateWeekButton } from "./week-page";
 import { storeProjects } from "./storage";
 import { displayTaskItem } from "./ui-helpers";
 import "./styles.css";
-export { createHomePage, displayProjects, displayTasks };
+export { createHomePage, displayProjects, displayProjectTasks, displayHomeTasks };
 
 function createHomePage() {
     if (getCounter() == 0) {
         addProject("Home", []);
     }
     displayProjects();
-    displayTasks(1);
+    displayHomeTasks();
     implementProjectDialog();
     implementTaskDialog();
     activateHomeButton();   
@@ -33,7 +33,7 @@ function displayProjects() {
             projectButton.id = project.id;
             projectButton.classList.add("project-button");
             projectButton.addEventListener("click", () => {
-                displayTasks(projectButton.id);
+                displayProjectTasks(projectButton.id);
             });
             projectsList.appendChild(projectButton);
         }
@@ -41,21 +41,58 @@ function displayProjects() {
     activateProjectButtons();
 }
 
-function displayTasks(projectId) {
+function displayProjectTasks(projectId) {
     const taskList = document.querySelector("#taskList");
+    const taskHeader = document.querySelector("#task-header");
     taskList.textContent = "";
+    taskHeader.textContent = "";
+    const placeholder = document.createElement("div");
+    const emptySpaces = document.createTextNode('\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0');
+    placeholder.appendChild(emptySpaces);
+    taskHeader.appendChild(placeholder);
     for (const project of projectList) {
-        if (projectId == project.id || projectId == 1) {
-            if (projectId != 1 && project.taskList.length == 0) {
+        if (projectId == project.id) {
+            const header = document.createElement("h2");
+            header.textContent = project.title;
+            taskHeader.appendChild(header);
+            const deleteProjectButton = document.createElement("button");
+            deleteProjectButton.textContent = "Delete Project";
+            taskHeader.appendChild(deleteProjectButton);
+            taskList.appendChild(taskHeader);
+            if ( project.taskList.length == 0) {
                 displayEmptyProject();
             } else {
                 let taskCounter = 0;
                 for (const task of project.taskList) {
                     displayTaskItem(project, task, taskCounter, "project");
+                    taskCounter++;
                 }
-                taskCounter++;
             }
-            
+        }
+    }
+}
+
+function displayHomeTasks() {
+    const taskList = document.querySelector("#taskList");
+    const taskHeader = document.querySelector("#task-header");
+    taskList.textContent = "";
+    taskHeader.textContent = "";
+    const placeholder = document.createElement("div");
+    const emptySpaces = document.createTextNode('\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0');
+    placeholder.appendChild(emptySpaces);
+    taskHeader.appendChild(placeholder);
+    const header = document.createElement("h2");
+    header.textContent = "Home";
+    taskHeader.appendChild(header);
+    const deleteProjectButton = document.createElement("button");
+    deleteProjectButton.textContent = "Delete Project";
+    taskHeader.appendChild(deleteProjectButton);
+    taskList.appendChild(taskHeader);
+    for (const project of projectList) {
+        let taskCounter = 0;
+        for (const task of project.taskList) {
+            displayTaskItem(project, task, taskCounter, "home");
+            taskCounter++;
         }
     }
 }
@@ -64,7 +101,7 @@ function activateHomeButton () {
     const homeButton = document.querySelector(".home-button");
     homeButton.style.fontWeight = "bold";
     homeButton.addEventListener("click", () => {
-        displayTasks("1");
+        displayHomeTasks();
     });
 }
 
@@ -84,10 +121,7 @@ function activateProjectButtons () {
 
 function displayEmptyProject () {
     const taskList = document.querySelector("#taskList");
-    const header = document.createElement("h2");
-    header.textContent = "Empty Project";
     const para = document.createElement("p");
-    para.textContent = "Add a task to this project or delete project"
-    taskList.appendChild(header);
+    para.textContent = "Add a task to this project or delete project";
     taskList.appendChild(para);
 }

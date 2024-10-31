@@ -1,6 +1,6 @@
 export { implementProjectDialog };
 import { addProject } from "./to-do-list";
-import { displayProjects, displayTasks } from "./home-page";
+import { displayProjects, displayProjectTasks } from "./home-page";
 
 function implementProjectDialog() {
     const projectDialog = document.querySelector("#project-dialog");
@@ -28,7 +28,7 @@ function implementProjectDialog() {
                 button.style.fontWeight = "bold";
             }
         });
-        displayTasks(newProject.id);
+        displayProjectTasks(newProject.id);
         projectInput.value = "";
         projectDialog.close();
     });
