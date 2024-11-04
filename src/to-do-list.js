@@ -6,9 +6,9 @@ export { projectList, addProject };
 const projectList = retrieveProjects();
 
 function addProject(title, taskList) {
-    const id = incrementCounter();
-    const newProject = createProject(id, title, taskList);
-    projectList.push(newProject);
-    storeProjects();
-    return newProject;
-} 
+  const id = incrementCounter();
+  const newProject = createProject(id, title, taskList);
+  projectList.push(newProject);
+  storeProjects();
+  return newProject;
+}
