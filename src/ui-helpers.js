@@ -9,9 +9,38 @@ import { displayTodayTasks } from "./today-page";
 import { displayWeekTasks } from "./week-page";
 import { projectList } from "./to-do-list";
 import { storeProjects } from "./storage";
+
 const { parse } = require("date-fns");
 const { format } = require("date-fns");
+
 export { displayTaskItem, deleteProject };
+
+function updateCompletionStatus(task) {
+  const updatedTask = task;
+  const newStatus = !task.complete;
+  updatedTask.complete = newStatus;
+}
+
+function deleteTask(taskCounter, project, page) {
+  project.taskList.splice(taskCounter, 1);
+  if (page == "project") {
+    displayProjectTasks(project.id);
+  } else if (page == "home") {
+    displayHomeTasks();
+  } else if (page == "today") {
+    displayTodayTasks();
+  } else if (page == "week") {
+    displayWeekTasks();
+  }
+}
+
+function deleteProject(projectCounter) {
+  projectList.splice(projectCounter, 1);
+  storeProjects();
+  displayProjects();
+  displayHomeTasks();
+  activateHomeButton();
+}
 
 function displayTaskItem(project, task, taskCounter, page) {
   const taskList = document.querySelector("#taskList");
@@ -25,7 +54,7 @@ function displayTaskItem(project, task, taskCounter, page) {
   if (task.complete == true) {
     checkbox.checked = true;
   }
-  checkbox.onclick = function () {
+  checkbox.onclick = function updateCompletion () {
     updateCompletionStatus(task);
   };
   containerOne.appendChild(checkbox);
@@ -54,37 +83,10 @@ function displayTaskItem(project, task, taskCounter, page) {
   deleteButton.type = "image";
   deleteButton.classList.add("delete-button");
   deleteButton.src = trash;
-  deleteButton.addEventListener("click", function () {
+  deleteButton.addEventListener("click", () => {
     deleteTask(taskCounter, project, page);
   });
   containerTwo.appendChild(deleteButton);
   taskItem.appendChild(containerTwo);
   taskList.appendChild(taskItem);
-}
-
-function updateCompletionStatus(task) {
-  const newStatus = task.complete ? false : true;
-  task.complete = newStatus;
-}
-
-function deleteTask(taskCounter, project, page) {
-  project.taskList.splice(taskCounter, 1);
-  if (page == "project") {
-    displayProjectTasks(project.id);
-  } else if (page == "home") {
-    displayHomeTasks();
-  } else if (page == "today") {
-    displayTodayTasks();
-  } else if (page == "week") {
-    displayWeekTasks();
-  }
-}
-
-function deleteProject(projectCounter) {
-  console.log(projectCounter);
-  projectList.splice(projectCounter, 1);
-  storeProjects();
-  displayProjects();
-  displayHomeTasks();
-  activateHomeButton();
 }

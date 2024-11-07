@@ -2,5 +2,17 @@
   "extends": [
     "airbnb-base",
     "prettier"
-  ]
+  ],
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "no-use-before-define": ["error", {
+      "functions": true,
+      "classes": true,
+      "variables": true,
+      "allowNamedExports": true
+    }]
+  }
 }

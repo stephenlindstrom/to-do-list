@@ -1,6 +1,7 @@
 import { createProject } from "./project";
 import { retrieveProjects, storeProjects } from "./storage";
 import { incrementCounter } from "./counter";
+
 export { projectList, addProject };
 
 const projectList = retrieveProjects();

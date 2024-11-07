@@ -7,6 +7,7 @@ import { activateWeekButton } from "./week-page";
 import { storeProjects } from "./storage";
 import { displayTaskItem, deleteProject } from "./ui-helpers";
 import "./styles.css";
+
 export {
   createHomePage,
   displayProjects,
